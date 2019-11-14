@@ -37,9 +37,9 @@ def show_basic_fits_data(hdulist):
     #Fits file info
     hdulist.info()
     #Primary Header
-    print repr(hdulist[0].header)
+    print(repr(hdulist[0].header))
     #Data Table Header
-    print repr(hdulist[1].header)
+    print(repr(hdulist[1].header))
     return
     
 def show_empirical_detection_contour(hdulist):
@@ -59,7 +59,7 @@ def show_empirical_detection_contour(hdulist):
     logPerMin = np.log10(hdulist[0].header['PERMIN'])
     nInjection = hdulist[1].header['NAXIS2']
     kicWant = hdulist[0].header['KEPLERID']
-    print "KIC: {0:09d} Num Inj: {1:d}".format(kicWant, nInjection)
+    print("KIC: {0:09d} Num Inj: {1:d}".format(kicWant, nInjection))
     # Set bin edge spacing to roughly achieve nWantPerBin
     # injections per bin.  Always have a minimum minNBin bins
     # each dimension
@@ -75,7 +75,7 @@ def show_empirical_detection_contour(hdulist):
     nYBin = nXBin + 1
     # Orbital period is assigned x dimension
     # Planet Radius is assigned y dimension
-    print "X dimen Porb: {0:d} Bins Y dimen Rp: {1:d} Bins".format(nXBin, nYBin)
+    print("X dimen Porb: {0:d} Bins Y dimen Rp: {1:d} Bins".format(nXBin, nYBin))
     # Use numpy histogram2d to return counts of injected signals in 2d grid
     nAll = np.histogram2d(injPeriod, injRp, \
                 bins=(nXBin,nYBin), \
@@ -157,7 +157,7 @@ def show_window_function(hdulist):
     for idx, hdrstring in enumerate(cdppHeadStr):
         cdpps[idx] = hdulist[0].header[hdrstring]
         
-    print "KIC: {0:09d} Num Inj: {1:d}".format(kicWant, nInjection)
+    print("KIC: {0:09d} Num Inj: {1:d}".format(kicWant, nInjection))
     # We need to find injections that are expected to be in the high
     # SNR regime.  We need to do the selection of targets by injected Rp
     # rather than by MES alone because MES depends upon # of transits
@@ -193,7 +193,7 @@ def show_window_function(hdulist):
     oneEarthMes = depth / useCdpp * np.sqrt(3.0)
     mesRatio = minMES / oneEarthMes
     useRpMin = np.sqrt(mesRatio)
-    print "Use Rp Min [Rearth]: {0:f}".format(useRpMin[0])
+    print("Use Rp Min [Rearth]: {0:f}".format(useRpMin[0]))
 
     # Trim the data outside period and rp range wanted
     idx = np.where((injRps > useRpMin) & (injPeriods > expMinPeriod) & \
@@ -221,7 +221,7 @@ def show_window_function(hdulist):
     # Window function is number recovered / number injected for each bin
     winFunction = np.double(nPass) / np.double(nAll)
     midx = xedges[:-1] + np.diff(xedges)/2.0
-    print "Kic: {0:d} useN: {1:d} nBin: {2:d}".format(kicWant, useN, len(midx)) 
+    print("Kic: {0:d} useN: {1:d} nBin: {2:d}".format(kicWant, useN, len(midx))) 
 
     # Setup figure filename and figures
     wantFigure = 'emp_win_func_{0:09d}'.format(kicWant)
@@ -260,7 +260,7 @@ def show_detection_efficiency(hdulist):
     perMin = hdulist[0].header['PERMIN']
     nInjection = hdulist[1].header['NAXIS2']
     kicWant = hdulist[0].header['KEPLERID']
-    print "KIC: {0:09d} Num Inj: {1:d}".format(kicWant, nInjection)
+    print("KIC: {0:09d} Num Inj: {1:d}".format(kicWant, nInjection))
     # We need to find injections that pass the window function so
     # the detection efficiency is not contaminated by injections
     # due to window function effects.  Also avoid injections
@@ -294,7 +294,7 @@ def show_detection_efficiency(hdulist):
     nBins = np.round((maxMes - minMes) / delMes)
     xedges = np.linspace(minMes, maxMes, nBins+1)
     midx = xedges[:-1] + np.diff(xedges)/2.0
-    print "Kic: {0:d} useN: {1:d} nBin: {2:d}".format(kicWant, useN, len(midx)) 
+    print("Kic: {0:d} useN: {1:d} nBin: {2:d}".format(kicWant, useN, len(midx))) 
     detectionEff = np.zeros_like(midx)
     detectionEffN = np.zeros_like(midx)
     if idxKeep.size > 5:
@@ -310,8 +310,8 @@ def show_detection_efficiency(hdulist):
             else:
                 detectionEff[i-1] = 1.0
                 detectionEffN[i-1] = 0
-            print "Kic: {0:d} Mes: {1:f} DetEff: {2:f} NinBin: {3:f}".format( \
-                        kicWant, midx[i-1], detectionEff[i-1], detectionEffN[i-1])
+            print("Kic: {0:d} Mes: {1:f} DetEff: {2:f} NinBin: {3:f}".format( \
+                        kicWant, midx[i-1], detectionEff[i-1], detectionEffN[i-1]))
     # Setup figure filename and figures
     wantFigure = 'emp_det_eff_{0:09d}'.format(kicWant)
     fig, ax, fsd = setup_figure()

@@ -1,5 +1,5 @@
 # Kepler-FLTI
-Kepler-FLTI.py - Illustrate using the Flux-Level Transit Injection (FLTI) Tests of TPS for Data Release 25.  The FLTI test output is in the FITs file format.  This code generates the figures in the documentation of FLTI
+Kepler-FLTI.py - Illustrate using the Flux-Level Transit Injection (FLTI) Tests of TPS for Data Release 25.  The FLTI test output is in the FITs file format.  This code generates the figures in the documentation of FLTI.
     
 Burke, C.J. & Catanzarite, J. 2017, "Planet Detection Metrics: Per-Target Flux-Level Transit Injection Tests of TPS for Data Release 25", KSCI-19109-001
        
@@ -7,7 +7,7 @@ Burke, C.J. & Catanzarite, J. 2017, "Planet Detection Metrics: Per-Target Flux-L
       
 **Running**: python Kepler-FLTI.py
     
-**Output**: Displays a series of figures and generates hardcopy
+**Output**: Displays a series of figures and generates hardcopy.
 
 Notices:
 
